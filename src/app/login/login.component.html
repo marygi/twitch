@@ -1,2 +1,12 @@
-<button mat-flat-button color="primary" (click)="login()">Primary</button>
+<mat-grid-list cols="3" rowHeight="70vh">
+	<mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+	<mat-grid-tile colspan="1" rowspan="1">
+		<div class="login-container">
+			<h3>Please log in with Twitch Authentication</h3>
+			<button mat-flat-button color="primary" (click)="login()">Log in</button>
+		</div>
+	</mat-grid-tile>
+</mat-grid-list>
+
+
 
