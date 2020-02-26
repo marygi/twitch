@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardComponent } from './dashboard.component';
+import { DashboardGuard } from './dashboard.guard';
 
 
 
@@ -14,6 +15,9 @@ import { DashboardComponent } from './dashboard.component';
 	],
 	exports: [
 		DashboardComponent
+	],
+	providers: [
+		DashboardGuard
 	]
 })
 export class DashboardModule { }
