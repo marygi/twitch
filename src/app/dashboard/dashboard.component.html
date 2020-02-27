@@ -8,8 +8,9 @@
 				   [matAutocomplete]="topGameAuto"
 				   [formControl]="topGameControl">
 			<mat-autocomplete #topGameAuto="matAutocomplete"
+							  [displayWith]="displayGameName"
 							  (optionSelected)="getStreams($event)">
-				<mat-option *ngFor="let game of filteredTopGames | async" [value]="game.id">
+				<mat-option *ngFor="let game of filteredTopGames | async" [value]="game">
 					<img class="top-games-pic" [src]="game.box_art_url|imageSize:'30'">
 					<span>{{game.name}}</span>
 				</mat-option>

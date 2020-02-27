@@ -42,7 +42,8 @@ export class DashboardComponent implements OnInit {
 				this.topGames = res[1].data;
 				this.filteredTopGames = this.topGameControl.valueChanges
 					.pipe(
-						startWith(''),
+						startWith(null),
+						map(game => game && typeof game === 'object' ? game.name : game),
 						map(game => game ? this.filterGames(game) : this.topGames.slice())
 					);
 
@@ -55,8 +56,7 @@ export class DashboardComponent implements OnInit {
 	}
 
 	getStreams( event: MatAutocompleteSelectedEvent  ) {
-
-		this.twitchService.getStreamsList( event.option.value )
+		this.twitchService.getStreamsList( event.option.value.id )
 			.subscribe((res: StreamData) => {
 				this.streams = res.data;
 				this.streamPagination = res.pagination;
@@ -83,4 +83,7 @@ export class DashboardComponent implements OnInit {
 		return this.topGames.filter(game => game.name.toLowerCase().indexOf(filterValue) === 0);
 	}
 
+	displayGameName(game): string {
+		return game ? game.name : game;
+	}
 }
