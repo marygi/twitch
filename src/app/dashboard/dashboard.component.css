@@ -1,0 +1,40 @@
+.dashboard-container {
+	margin: 50px auto;
+	max-width: 80%;
+}
+
+.top-games {
+	align-items: center;
+	display: flex;
+	margin: 0 auto 20px;
+	width: 60%;
+}
+
+.top-games-auto {
+	flex-grow: 1;
+}
+
+.top-games-pic {
+	vertical-align: middle;
+	margin-right: 8px;
+}
+
+.streams-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.stream-item {
+	margin: 10px 0;
+	width: 22%;
+}
+
+.stream-title {
+	height: 50px;
+}
+
+.stream-image {
+	display: block;
+	height: auto !important;
+}

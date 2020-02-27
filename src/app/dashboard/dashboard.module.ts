@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardGuard } from './dashboard.guard';
+import { SharedModule } from '../shared/shared.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -11,7 +13,10 @@ import { DashboardGuard } from './dashboard.guard';
 		DashboardComponent
 	],
 	imports: [
-		CommonModule
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		SharedModule
 	],
 	exports: [
 		DashboardComponent
