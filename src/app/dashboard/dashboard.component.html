@@ -30,8 +30,8 @@
 					</mat-card-header>
 					<img mat-card-image class="stream-image" [src]="stream.thumbnail_url|imageSize:'600'" [alt]="stream.title">
 					<mat-card-actions>
-						<button mat-flat-button color="primary" (click)="followChannel(stream.id)">Follow</button>&nbsp;
-						<button mat-flat-button color="warn" (click)="unfollowChannel(stream.id, indx)">Unfollow</button>
+						<button mat-flat-button color="primary" (click)="followChannel(stream.user_id)">Follow</button>&nbsp;
+						<button mat-flat-button color="warn" (click)="unfollowChannel(stream.user_id, indx)">Unfollow</button>
 					</mat-card-actions>
 				</mat-card>
 			</div>
@@ -42,13 +42,16 @@
 	<ng-container *ngIf="follows.length">
 		<h2> Follows </h2>
 		<div class="streams-list">
-			<div class="stream-item" *ngFor="let follow of follows">
+			<div class="stream-item" *ngFor="let follow of follows; let indx = index">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>{{ follow.channel.name }}</mat-card-title>
 						<mat-card-subtitle class="stream-title">{{ follow.channel.display_name| slice : 0 : 100 }}</mat-card-subtitle>
 					</mat-card-header>
 					<img mat-card-image class="stream-image" [src]="follow.channel.logo|imageSize:'600'" [alt]="follow.channel.display_name">
+					<mat-card-actions>
+						<button mat-flat-button color="warn" (click)="unfollowChannel(follow.channel._id, indx)">Unfollow</button>
+					</mat-card-actions>
 				</mat-card>
 			</div>
 		</div>

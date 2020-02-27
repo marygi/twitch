@@ -22,12 +22,12 @@
 .streams-list {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	margin: 0 -1%;
 }
 
 .stream-item {
-	margin: 10px 0;
-	width: 22%;
+	margin: 2px 1%;
+	width: 23%;
 }
 
 .stream-title {
