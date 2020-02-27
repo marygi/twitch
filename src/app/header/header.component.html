@@ -1,5 +1,14 @@
 <mat-toolbar>
 	<h1>Twitch Channels</h1>
 	<span class="spacer"></span>
-	<button mat-flat-button color="primary" (click)="logout()">Logout</button>
+	<ng-container *ngIf="user">
+		<div class="header-user">
+			<img src="{{ user.logo }}" alt="{{ user.display_name }}">
+			<div>
+				<h4>{{ user.display_name }}</h4>
+				<small>{{ user.email }}</small>
+			</div>
+		</div>
+		<button mat-flat-button color="primary" (click)="logout()">Logout</button>
+	</ng-container>
 </mat-toolbar>

@@ -1,3 +1,27 @@
 .spacer {
 	flex: 1 1 auto;
 }
+
+.header-user {
+	align-items: center;
+	display: flex;
+	font-weight: 400;
+	line-height: 1;
+	margin-right: 60px;
+}
+
+.header-user img {
+	align-items: center;
+	display: block;
+	height: 40px;
+	margin-right: 10px;
+	width: 40px;
+}
+
+.header-user h4 {
+	font-size: 16px;
+	line-height: 1;
+}
+.header-user small {
+	font-size: 12px;
+}
