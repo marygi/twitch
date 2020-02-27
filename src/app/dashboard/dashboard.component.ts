@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { forkJoin, Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import {map, mergeMap, startWith} from 'rxjs/operators';
 
 import { TwitchService } from '../shared/service/twitch.service';
 import { UserService } from '../shared/service/user.service';
@@ -32,26 +32,27 @@ export class DashboardComponent implements OnInit {
 			private userService: UserService) { }
 
 	ngOnInit() {
-		const { twitchService, userService, topGamesLimit } = this;
+		const {twitchService, userService, topGamesLimit} = this;
 
 		forkJoin(twitchService.getUser(), twitchService.getTopGamesList({ first: topGamesLimit }))
-			.subscribe( (res: [ User, GameData ]) => {
-				this.user = res[0];
-				userService.addUser(res[0]);
+			.pipe(
+				mergeMap((res: [ User, GameData ]) => {
+					this.user = res[0];
+					userService.addUser(res[0]);
 
-				this.topGames = res[1].data;
-				this.filteredTopGames = this.topGameControl.valueChanges
-					.pipe(
-						startWith(null),
-						map(game => game && typeof game === 'object' ? game.name : game),
-						map(game => game ? this.filterGames(game) : this.topGames.slice())
-					);
+					this.topGames = res[1].data;
+					this.filteredTopGames = this.topGameControl.valueChanges
+						.pipe(
+							startWith(null),
+							map(game => game && typeof game === 'object' ? game.name : game),
+							map(game => game ? this.filterGames(game) : this.topGames.slice())
+						);
 
-				this.twitchService.getUserFollowsChannels( this.user._id )
-					.subscribe((res: FollowChannels) => {
-						this.follows = res.follows;
-					});
-			});
+					return twitchService.getUserFollowsChannels( this.user._id );
+				})
+			).subscribe((res: FollowChannels) => {
+				this.follows = res.follows;
+		});
 
 	}
 
