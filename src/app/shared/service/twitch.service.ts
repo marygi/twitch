@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../model/user';
 import { GameData } from '../model/game';
 import { StreamData } from '../model/stream';
-import {FollowChannels, Follows } from '../model/channel';
+import { FollowChannels, Follows } from '../model/channel';
 
 @Injectable()
 export class TwitchService {
@@ -19,10 +19,10 @@ export class TwitchService {
 		return this.http.get<FollowChannels>(`https://api.twitch.tv/kraken/users/${userId}/follows/channels`);
 	}
 
-	getTopGamesList(param: { first?: string, before?: string, after?: string }): Observable<GameData> {
+	getTopGamesList(params: { first?: string, before?: string, after?: string }): Observable<GameData> {
 		return this.http.get<GameData>('https://api.twitch.tv/helix/games/top',
 			{
-				params: param || {},
+				params: params || {},
 				withCredentials: false
 			});
 	}
@@ -32,11 +32,11 @@ export class TwitchService {
 	}
 
 	followChannel(userId: string, channelId: string): Observable<Follows> {
-		return this.http.put<Follows>(`https://api.twitch.tv/kraken/users/${userId}/follows/channels/${channelId}?scope=user_read`, {});
+		return this.http.put<Follows>(`https://api.twitch.tv/kraken/users/${userId}/follows/channels/${channelId}?scope=user_follows_edit`, {});
 	}
 
 	unfollowChannel(userId: string, channelId: string) {
-		return this.http.delete(`https://api.twitch.tv/kraken/users/${userId}/follows/channels/${channelId}?scope=user_read`);
+		return this.http.delete(`https://api.twitch.tv/kraken/users/${userId}/follows/channels/${channelId}?scope=user_follows_edit`);
 	}
 
 }
